@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combo Set Offer</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+}
+
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.price {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.price h2 {
+    color: red;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #25D366;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Product Image -->
+    <img src="product.jpg" alt="Combo Set">
+
+    <!-- Price -->
+    <div class="price">
+        <h2>Combo Set ₹799</h2>
+        <p>Special Offer ₹419</p>
+    </div>
+
+    <!-- Order Form -->
+    <form onsubmit="sendToWhatsApp(); return false;">
+        
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="mobile" placeholder="Mobile Number" required>
+        <input type="text" id="house" placeholder="House No./Gali No." required>
+        <input type="text" id="landmark" placeholder="Landmark (Nearby)" required>
+        <input type="text" id="city" placeholder="City" required>
+        <input type="text" id="state" placeholder="State" required>
+        <input type="text" id="pincode" placeholder="Pincode" required>
+
+        <button type="submit">Order on WhatsApp</button>
+
+    </form>
+
+</div>
+
+<script>
+function sendToWhatsApp() {
+
+    var name = document.getElementById("name").value;
+    var mobile = document.getElementById("mobile").value;
+    var house = document.getElementById("house").value;
+    var landmark = document.getElementById("landmark").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    var pincode = document.getElementById("pincode").value;
+
+    var message = "🛒 New Order:%0A"
+    + "Product: Combo Set ₹419%0A%0A"
+    + "Name: " + name + "%0A"
+    + "Mobile: " + mobile + "%0A"
+    + "Address: " + house + "%0A"
+    + "Landmark: " + landmark + "%0A"
+    + "City: " + city + "%0A"
+    + "State: " + state + "%0A"
+    + "Pincode: " + pincode;
+
+    var whatsappURL = "https://wa.me/916306078116?text=" + message;
+
+    window.open(whatsappURL, '_blank');
+}
+</script>
+
+</body>
+</html>
