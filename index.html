@@ -1,108 +1,509 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Ladies Fashion Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f8f8f8;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladies Fashion Hub - Latest & Trending Kurtis</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header {
-      background: black;
-      color: white;
-      padding: 15px;
-      font-size: 22px;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-    .product {
-      background: white;
-      margin: 20px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+        /* Color Variables */
+        :root {
+            --primary-pink: #ff6b9d;
+            --secondary-pink: #ffb3d1;
+            --beige: #f5f2e9;
+            --dark-pink: #e55a87;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+        }
 
-    img {
-      width: 90%;
-      max-width: 350px;
-      border-radius: 10px;
-    }
+        /* Header/Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--secondary-pink) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .price {
-      font-size: 20px;
-      color: red;
-      font-weight: bold;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.1"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
 
-    .old-price {
-      text-decoration: line-through;
-      color: gray;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
 
-    button {
-      background: green;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      margin-top: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
 
-    button:hover {
-      background: darkgreen;
-    }
+        .hero-content p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
 
-    footer {
-      margin-top: 20px;
-      padding: 10px;
-      background: #222;
-      color: white;
-      font-size: 14px;
-    }
-  </style>
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-pink);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background: var(--beige);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-pink);
+            margin-bottom: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+        }
+
+        .original-price {
+            font-size: 1.1rem;
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .discount {
+            background: var(--primary-pink);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--beige) 0%, white 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-item h3 {
+            font-size: 1.4rem;
+            color: var(--dark-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item i {
+            font-size: 3rem;
+            color: var(--secondary-pink);
+            margin-bottom: 1rem;
+        }
+
+        .phone-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c2c2c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-pink);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-pink);
+            transform: translateY(-3px);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #20ba5a;
+            box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 26px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ladies Fashion Hub</h1>
+                <p>Latest & Trending Kurtis at Affordable Prices</p>
+                <div class="cta-buttons">
+                    <a href="#products" class="btn btn-primary">Shop Now</a>
+                    <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order" class="btn btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <header>
-    Ladies Fashion Store 👗
-  </header>
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Trending Collection</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1574251150896-8b60b513536f?w=400&h=250&fit=crop&crop=center" alt="Printed Kurti" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Printed Kurti</h3>
+                        <div class="price-section">
+                            <span class="current-price">₹699</span>
+                            <span class="original-price">₹1299</span>
+                            <span class="discount">46% OFF</span>
+                        </div>
+                        <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order%20Printed%20Kurti%20-%20₹699" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
 
-  <div class="product">
-    
-    <!-- ✅ Image already added -->
-    <img src="https://images.unsplash.com/photo-1593032465171-8c0b9a4a1d2c" alt="Track Pant">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&h=250&fit=crop&crop=center" alt="Co-ord Set" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Co-ord Set</h3>
+                        <div class="price-section">
+                            <span class="current-price">₹999</span>
+                            <span class="original-price">₹1799</span>
+                            <span class="discount">44% OFF</span>
+                        </div>
+                        <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order%20Co-ord%20Set%20-%20₹999" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
 
-    <h2>Women Combo Track Pant Set</h2>
-    
-    <p>Stylish & Comfortable Track Pants for Daily Wear, Gym & Travel</p>
-    
-    <p>
-      <span class="old-price">₹799</span><br>
-      <span class="price">Offer Price: ₹419</span>
-    </p>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1487222474744-89535291c1c9?w=400&h=250&fit=crop&crop=center" alt="Graphic T-shirt" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Graphic T-shirt</h3>
+                        <div class="price-section">
+                            <span class="current-price">₹399</span>
+                            <span class="original-price">₹699</span>
+                            <span class="discount">43% OFF</span>
+                        </div>
+                        <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order%20Graphic%20T-shirt%20-%20₹399" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
 
-    <p>✔ Soft & Stretchable Fabric</p>
-    <p>✔ Elastic Waistband</p>
-    <p>✔ Trendy Side Stripes Design</p>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=250&fit=crop&crop=center" alt="Sunglasses" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Designer Sunglasses</h3>
+                        <div class="price-section">
+                            <span class="current-price">₹299</span>
+                            <span class="original-price">₹599</span>
+                            <span class="discount">50% OFF</span>
+                        </div>
+                        <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order%20Designer%20Sunglasses%20-%20₹299" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
 
-    <!-- ✅ WhatsApp button with auto message -->
-    <a href="https://wa.me/916306078116?text=Mujhe%20ye%20Track%20Pant%20order%20karna%20hai">
-      <button>Order on WhatsApp</button>
-    </a>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1608233965292-343d9d1ba0e7?w=400&h=250&fit=crop&crop=center" alt="Night Suit" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Cotton Night Suit</h3>
+                        <div class="price-section">
+                            <span class="current-price">₹599</span>
+                            <span class="original-price">₹1099</span>
+                            <span class="discount">45% OFF</span>
+                        </div>
+                        <a href="https://wa.me/916306078116?text=Hello%20Ladies%20Fashion%20Hub%2C%20I%20want%20to%20order%20Cotton%20Night%20Suit%20-%20₹599" class="btn btn-whatsapp" style="width: 100%; margin-top: 1rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </div>
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title" style="color: #333;">About Ladies Fashion Hub</h2>
+                <p>We provide latest and trending ladies fashion at affordable prices with premium quality. All India COD available. Your satisfaction is our priority!</p>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    © 2026 Ladies Fashion | All Rights Reserved
-  </footer>
-
-</body>
-</html>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Affordable Pricing</h3>
+                   
